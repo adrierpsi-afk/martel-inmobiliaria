@@ -1,0 +1,5 @@
+# Artefactos del sistema
+.thumbnail
+Thumbs.db
+.DS_Store
+desktop.ini
