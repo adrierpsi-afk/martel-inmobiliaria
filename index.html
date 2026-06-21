@@ -22,6 +22,8 @@
     --muted:#9A9288;        /* warm gray */
     --gold:#E0A526;
     --gold-deep:#C68E1C;
+    --sunrise:#F2913D;       /* disponible — naranja alba de sol */
+    --sold-green:#3C9D63;    /* vendido / alquilado */
     --gold-soft:rgba(224,165,38,.13);
     --wa:#25D366;
     --wa-deep:#1da851;
@@ -183,6 +185,8 @@
   .ecard:hover{transform:translateY(-7px);box-shadow:var(--shadow);border-color:var(--line)}
   .ecard .media{position:relative;height:230px}
   .ecard .media .ph{position:absolute;inset:0}
+  .ecard .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .pop .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   .sello{
     position:absolute;top:15px;right:15px;z-index:3;width:84px;height:84px;border-radius:50%;
     border:2px solid var(--gold-deep);color:var(--gold-deep);display:grid;place-items:center;
@@ -216,6 +220,22 @@
   .scard .sico svg{width:28px;height:28px;color:var(--gold-deep)}
   .scard h3{font-family:var(--serif);font-size:25px;font-weight:600;color:var(--ink);margin-bottom:8px}
   .scard p{font-size:14.5px;color:var(--charcoal)}
+  .schips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+  .schips span{font-size:11.5px;font-weight:600;letter-spacing:.02em;color:var(--gold-deep);background:var(--gold-soft);border:1px solid rgba(224,165,38,.22);padding:5px 11px;border-radius:999px}
+
+  /* ---------- dos caminos (selector de público) ---------- */
+  .paths{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+  .pathcard{display:block;text-decoration:none;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:38px 34px;transition:transform .4s ease,box-shadow .4s ease,border-color .4s ease}
+  .pathcard:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--gold)}
+  .pathcard .picon{width:60px;height:60px;border-radius:14px;background:var(--gold-soft);display:grid;place-items:center;margin-bottom:22px}
+  .pathcard .picon svg{width:30px;height:30px;color:var(--gold-deep)}
+  .ptag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+  .pathcard h3{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--ink);line-height:1.1;margin:8px 0 10px}
+  .pathcard p{font-size:15px;color:var(--charcoal);margin-bottom:18px}
+  .plink{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:var(--gold-deep)}
+  .plink svg{width:18px;height:18px;transition:transform .3s}
+  .pathcard:hover .plink svg{transform:translateX(4px)}
+  .aud{display:inline-block;margin-top:14px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);background:var(--gold-soft);border:1px solid rgba(224,165,38,.22);padding:5px 13px;border-radius:999px}
 
   /* ---------- map ---------- */
   .map-shell{
@@ -240,7 +260,7 @@
   input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--gold);cursor:pointer;border:3px solid #fff}
   .freset{margin-top:16px;width:100%;justify-content:center;background:transparent;border:1px solid var(--line);color:var(--muted);padding:11px}
   .freset:hover{border-color:var(--gold);color:var(--gold-deep)}
-  #map{height:600px;width:100%;background:#eee;z-index:1}
+  #map{height:100%;min-height:600px;width:100%;background:#eee;z-index:1}
   .map-count{text-align:center;margin-top:22px;font-size:14px;color:var(--muted)}
   .map-count b{color:var(--gold-deep);font-family:var(--serif);font-size:22px;font-weight:700;margin:0 4px}
 
@@ -266,9 +286,8 @@
 
   .mk-pin{width:30px;height:30px;border-radius:50% 50% 50% 2px;transform:rotate(45deg);display:grid;place-items:center;border:2px solid #fff;box-shadow:0 5px 14px -3px rgba(74,58,30,.5)}
   .mk-pin>*{transform:rotate(-45deg)}
-  .mk-disp{background:var(--gold)}
-  .mk-sold{background:#8b8378}
-  .mk-proc{background:#3f7fd0}
+  .mk-disp{background:var(--sunrise)}
+  .mk-sold{background:var(--sold-green)}
   .mk-pin svg{width:14px;height:14px}
 
   /* ---------- proceso timeline ---------- */
@@ -387,7 +406,7 @@
     nav.links,.nav .btn{display:none}
     .burger{display:flex}
     section.block{padding:72px 0}
-    .egrid,.sgrid{grid-template-columns:1fr}
+    .egrid,.sgrid,.paths{grid-template-columns:1fr}
     .steps{grid-template-columns:1fr}
     .shead{margin-bottom:36px}
     #map{height:440px}
@@ -467,6 +486,32 @@
   </div>
 </section>
 
+<!-- ============ DOS CAMINOS (SELECTOR DE PÚBLICO) ============ -->
+<section class="block" id="caminos">
+  <div class="wrap">
+    <div class="shead" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;gap:16px">
+      <span class="eyebrow">¿Qué te trae a Martel?</span>
+      <h2 class="stitle" style="max-width:18ch">Elige tu camino y <span class="g">te acompañamos</span></h2>
+    </div>
+    <div class="paths">
+      <a class="pathcard reveal" href="#servicios">
+        <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><circle cx="17" cy="6" r="3"/><path d="M17 5v2M16 6h2"/></svg></div>
+        <span class="ptag">Soy propietario</span>
+        <h3>Quiero vender o alquilar mi propiedad</h3>
+        <p>Ponemos tu inmueble en valor con marketing real —fotos, video, TikTok y redes—, lo difundimos a los compradores correctos y cerramos la operación. La tasación es sin costo.</p>
+        <span class="plink">Ver cómo te ayudamos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="pathcard reveal" href="#mapa">
+        <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <span class="ptag">Busco propiedad</span>
+        <h3>Quiero comprar o alquilar un inmueble</h3>
+        <p>Explora nuestro portafolio en el mapa interactivo y te acompañamos en cada paso —búsqueda, visitas, gestión legal— hasta la entrega de llaves.</p>
+        <span class="plink">Ver propiedades <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ PROPIEDADES ENTREGADAS ============ -->
 <section class="block alt" id="entregadas">
   <div class="wrap">
@@ -479,8 +524,8 @@
     </div>
     <div class="egrid reveal" id="egrid"></div>
     <div class="efill reveal">
-      Sección lista para llenar — reemplaza cada tarjeta con tu foto, título, distrito y una breve nota.
-      Edita el arreglo <b>ENTREGADAS</b> en el código para añadir o quitar propiedades.
+      Estas son algunas de las operaciones que ya cerramos en Lima y provincias.
+      ¿Quieres que la tuya sea la próxima? <a href="#contacto" style="color:var(--gold-deep);font-weight:600">Conversemos</a>.
     </div>
   </div>
 </section>
@@ -490,16 +535,19 @@
   <div class="wrap">
     <div class="shead">
       <div class="reveal">
-        <span class="eyebrow">Qué hacemos</span>
+        <span class="eyebrow">Para propietarios</span>
         <h2 class="stitle" style="margin-top:16px">Todo lo que tu propiedad <span class="g">necesita</span></h2>
       </div>
-      <p class="lead reveal">Un solo equipo para cada etapa: desde poner tu inmueble en el mercado hasta entregar las llaves.</p>
+      <p class="lead reveal">¿Tienes un inmueble? Nos encargamos de todo: ponerlo en el mercado, difundirlo con marketing real y cerrar la mejor operación de venta o alquiler.</p>
     </div>
     <div class="sgrid">
       <div class="scard reveal">
         <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><circle cx="17" cy="6" r="3"/><path d="M17 5v2M16 6h2"/></svg></div>
-        <h3>Captación</h3>
-        <p>Ponemos tu propiedad en valor: fotos, precio de mercado y difusión a los compradores correctos.</p>
+        <h3>Captación y marketing</h3>
+        <p>Ponemos tu propiedad en valor y la mostramos a miles de personas: fotos y video profesional, reels y TikTok, campañas en Facebook e Instagram, publicación en portales inmobiliarios y carteles en zona. Y te mantenemos al tanto con reportes de monitoreo: alcance, interesados y avances de cada operación.</p>
+        <div class="schips">
+          <span>Fotos &amp; video</span><span>TikTok</span><span>Facebook</span><span>Instagram</span><span>Portales</span><span>Monitoreo</span>
+        </div>
       </div>
       <div class="scard reveal">
         <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0l-7.2-7.2A2 2 0 0 1 3 12V5a2 2 0 0 1 2-2h7a2 2 0 0 1 1.4.6l7.2 7.2a2 2 0 0 1 0 2.6z"/><circle cx="8" cy="8" r="1.4"/></svg></div>
@@ -523,8 +571,8 @@
 <!-- ============ COBERTURA NACIONAL ============ -->
 <section class="cobertura" id="cobertura">
   <div class="wrap reveal">
-    <span class="eyebrow" style="justify-content:center">Cobertura nacional</span>
-    <h3>Operamos en Lima y en las principales regiones del Perú</h3>
+    <span class="eyebrow" style="justify-content:center">Dónde operamos</span>
+    <h3>Presentes en Lima y Huancayo, y creciendo hacia nuevas regiones</h3>
     <div class="cob-chips" id="cobChips"></div>
   </div>
 </section>
@@ -534,7 +582,7 @@
   <div class="wrap">
     <div class="shead">
       <div class="reveal">
-        <span class="eyebrow">Mapa interactivo</span>
+        <span class="eyebrow">Para compradores</span>
         <h2 class="stitle" style="margin-top:16px">Encuentra tu <span class="g">zona ideal</span></h2>
       </div>
       <p class="lead reveal">Explora nuestro portafolio en Lima y provincias. Filtra por tipo, estado y presupuesto para descubrir la propiedad que se ajusta a ti.</p>
@@ -544,9 +592,8 @@
       <aside class="filters">
         <h3>Estado</h3>
         <div class="fgroup" style="padding-top:0">
-          <label class="check"><input type="checkbox" class="f-state" value="disponible" checked> <span class="dot-leg" style="background:var(--gold)"></span> Disponible</label>
-          <label class="check"><input type="checkbox" class="f-state" value="vendido" checked> <span class="dot-leg" style="background:#8b8378"></span> Vendido / Alquilado</label>
-          <label class="check"><input type="checkbox" class="f-state" value="proceso" checked> <span class="dot-leg" style="background:#3f7fd0"></span> En proceso</label>
+          <label class="check"><input type="checkbox" class="f-state" value="disponible" checked> <span class="dot-leg" style="background:var(--sunrise)"></span> Disponible</label>
+          <label class="check"><input type="checkbox" class="f-state" value="vendido" checked> <span class="dot-leg" style="background:var(--sold-green)"></span> Vendido / Alquilado</label>
         </div>
         <div class="fgroup">
           <h3 style="margin-bottom:10px">Tipo</h3>
@@ -563,10 +610,7 @@
         <div class="fgroup">
           <h3 style="margin-bottom:10px">Región</h3>
           <label class="check"><input type="checkbox" class="f-region" value="Lima" checked> Lima</label>
-          <label class="check"><input type="checkbox" class="f-region" value="Arequipa" checked> Arequipa</label>
-          <label class="check"><input type="checkbox" class="f-region" value="Cusco" checked> Cusco</label>
-          <label class="check"><input type="checkbox" class="f-region" value="Trujillo" checked> Trujillo</label>
-          <label class="check"><input type="checkbox" class="f-region" value="Piura" checked> Piura</label>
+          <label class="check"><input type="checkbox" class="f-region" value="Huancayo" checked> Huancayo</label>
         </div>
         <button class="btn freset" id="resetFilters">Restablecer filtros</button>
       </aside>
@@ -581,8 +625,8 @@
   <div class="wrap">
     <div class="shead">
       <div class="reveal">
-        <span class="eyebrow">Cómo trabajamos</span>
-        <h2 class="stitle" style="margin-top:16px">Un proceso <span class="g">sin fricciones</span></h2>
+        <span class="eyebrow">Para compradores</span>
+        <h2 class="stitle" style="margin-top:16px">Tu proceso de compra, <span class="g">sin fricciones</span></h2>
       </div>
     </div>
     <div class="timeline reveal" id="timeline">
@@ -724,17 +768,16 @@
 <script>
 /* ============ PROPIEDADES ENTREGADAS — edita este arreglo para llenar la sección ============ */
 const ENTREGADAS = [
-  {tag:"Departamento", title:"Título de la propiedad", district:"Distrito, Región", note:"Breve nota — ej. entregada a una familia.", sello:"Entregado", sclass:""},
-  {tag:"Casa", title:"Título de la propiedad", district:"Distrito, Región", note:"Breve nota — ej. operación cerrada en X meses.", sello:"Entregado", sclass:""},
-  {tag:"Local Comercial", title:"Título de la propiedad", district:"Distrito, Región", note:"Breve nota — ej. alquilado a un negocio local.", sello:"Entregado", sclass:""},
-  {tag:"Departamento", title:"Título de la propiedad", district:"Distrito, Región", note:"Breve nota — ej. primera vivienda del cliente.", sello:"Entregado", sclass:""},
-  {tag:"Casa", title:"Título de la propiedad", district:"Distrito, Región", note:"Breve nota — ej. venta por encima del precio esperado.", sello:"Entregado", sclass:""},
-  {tag:"Terreno", title:"Título de la propiedad", district:"Distrito, Región", note:"Breve nota — ej. proyecto de inversión.", sello:"Entregado", sclass:""}
+  {tag:"Casa", title:"Casa de 2 pisos, material noble", district:"Campoy, San Juan de Lurigancho", note:"Vendida en US$100,000. Operación cerrada con título de propiedad en regla.", sello:"Vendido", sclass:"", img:"uploads/entregada-campoy.jpeg"},
+  {tag:"Departamento", title:"Minidepartamento en zona comercial", district:"La Victoria, Lima", note:"28.70 m² a pocas cuadras de la Línea 2 del Metro y la Plaza Manco Cápac. Entregado a su nuevo propietario.", sello:"Vendido", sclass:"", img:"uploads/entregada-lavictoria.jpg"},
+  {tag:"Terreno", title:"Terreno comercial de doble frontis", district:"Motupe, San Juan de Lurigancho", note:"120 m² (6×20 m) en zona comercial, con título de propiedad. Ideal para inversión.", sello:"Vendido", sclass:"", img:"uploads/entregada-motupe.jpeg"},
+  {tag:"Casa", title:"Casa de 3 pisos con local comercial", district:"Centro de Huancayo, Junín", note:"Terreno de 60 m² cerca al Cerrito de la Libertad. Llaves entregadas a una nueva familia.", sello:"Vendido", sclass:"", img:"uploads/entregada-huancayo.png"},
+  {tag:"Local Comercial", title:"Local comercial y cuartos en alquiler", district:"Montenegro, San Juan de Lurigancho", note:"Local de 50 m² más cuartos, alquilados en zona comercial frente al mercado Sagrado Corazón de Jesús.", sello:"Alquilado", sclass:"ink", img:"uploads/entregada-montenegro.jpg"}
 ];
 document.getElementById('egrid').innerHTML = ENTREGADAS.map(e=>`
   <article class="ecard">
     <div class="media">
-      <div class="ph" data-label="foto · propiedad entregada"></div>
+      ${e.img ? `<img src="${e.img}" alt="${e.title} — ${e.district}" loading="lazy">` : `<div class="ph" data-label="foto · propiedad entregada"></div>`}
       <div class="sello ${e.sclass}">${e.sello}</div>
     </div>
     <div class="body">
@@ -746,26 +789,21 @@ document.getElementById('egrid').innerHTML = ENTREGADAS.map(e=>`
   </article>`).join('');
 
 /* ============ COBERTURA — edita estas regiones libremente ============ */
-const REGIONES = ["Lima","Arequipa","Cusco","Trujillo","Piura","Chiclayo"];
+const REGIONES = ["Lima","Huancayo"];
 document.getElementById('cobChips').innerHTML = REGIONES.map(r=>`
   <span class="cob-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="2.5"/></svg>${r}</span>`).join('')
   + `<span class="cob-chip more">y más</span>`;
 
 /* ============ MAP DATA ============ */
 const PROPS = [
-  {id:1, type:"Departamento", state:"disponible", name:"Dúplex Malecón", district:"Miraflores", city:"Lima", price:485000, m2:142, beds:3, lat:-12.1265, lng:-77.0305},
-  {id:2, type:"Departamento", state:"disponible", name:"Flat Pardo", district:"San Isidro", city:"Lima", price:620000, m2:165, beds:3, lat:-12.0985, lng:-77.0380},
-  {id:3, type:"Casa", state:"vendido", name:"Casa Las Begonias", district:"San Isidro", city:"Lima", price:0, m2:320, beds:4, lat:-12.0945, lng:-77.0330},
-  {id:4, type:"Local", state:"disponible", name:"Local Comercial", district:"La Victoria", city:"Lima", price:210000, m2:98, beds:0, lat:-12.0668, lng:-77.0258},
-  {id:5, type:"Departamento", state:"proceso", name:"Dpto Sillar", district:"Cayma", city:"Arequipa", price:298000, m2:108, beds:2, lat:-16.3850, lng:-71.5500},
-  {id:6, type:"Casa", state:"disponible", name:"Casa Yanahuara", district:"Yanahuara", city:"Arequipa", price:520000, m2:280, beds:4, lat:-16.3950, lng:-71.5450},
-  {id:7, type:"Terreno", state:"disponible", name:"Terreno Wanchaq", district:"Wanchaq", city:"Cusco", price:340000, m2:300, beds:0, lat:-13.5247, lng:-71.9617},
-  {id:8, type:"Departamento", state:"vendido", name:"Penthouse Aurora", district:"Miraflores", city:"Lima", price:0, m2:210, beds:3, lat:-12.1190, lng:-77.0335},
-  {id:9, type:"Casa", state:"proceso", name:"Casa Víctor Larco", district:"Víctor Larco", city:"Trujillo", price:395000, m2:240, beds:4, lat:-8.1340, lng:-79.0440},
-  {id:10, type:"Local", state:"vendido", name:"Local Centro", district:"Piura Centro", city:"Piura", price:0, m2:120, beds:0, lat:-5.1945, lng:-80.6328}
+  {id:1, type:"Casa", state:"vendido", name:"Casa Campoy", district:"Campoy, SJL", city:"Lima", price:100000, m2:0, beds:0, lat:-12.019215871052012, lng:-76.96583753502217, img:"uploads/entregada-campoy.jpeg"},
+  {id:2, type:"Departamento", state:"vendido", name:"Minidepartamento La Victoria", district:"La Victoria", city:"Lima", price:95000, m2:28.7, beds:1, lat:-12.061404316460706, lng:-77.03246655059107, img:"uploads/entregada-lavictoria.jpg"},
+  {id:3, type:"Terreno", state:"vendido", name:"Terreno Motupe", district:"Motupe, SJL", city:"Lima", price:90000, m2:120, beds:0, lat:-11.941142310570472, lng:-76.9770254711439, img:"uploads/entregada-motupe.jpeg"},
+  {id:4, type:"Casa", state:"vendido", name:"Casa Centro de Huancayo", district:"Centro de Huancayo", city:"Huancayo", price:110000, m2:60, beds:0, lat:-12.063743849731496, lng:-75.19770855348408, img:"uploads/entregada-huancayo.png"},
+  {id:5, type:"Local", state:"vendido", name:"Local y cuartos Montenegro", district:"Montenegro, SJL", city:"Lima", price:0, m2:50, beds:0, lat:-11.935583283469505, lng:-76.97122938560818, img:"uploads/entregada-montenegro.jpg", soldLabel:"ALQUILADO"}
 ];
 const fmt = n => "$" + n.toLocaleString("en-US");
-const STATE_LABEL = {disponible:"Disponible", vendido:"Vendido", proceso:"En proceso"};
+const STATE_LABEL = {disponible:"Disponible", vendido:"Vendido"};
 const WA = "https://wa.me/51987654321?text=";
 const phLabel = p => (p.state==="vendido"?"foto · entregada":"foto · "+p.type.toLowerCase());
 
@@ -777,22 +815,20 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r
   attribution:'&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:19
 }).addTo(map);
 
-const ICONS = {disponible:'mk-disp', vendido:'mk-sold', proceso:'mk-proc'};
+const ICONS = {disponible:'mk-disp', vendido:'mk-sold'};
 const PIN_SVG = {
   disponible:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
-  vendido:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><path d="M5 12l5 5 9-10"/></svg>',
-  proceso:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>'
+  vendido:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><path d="M5 12l5 5 9-10"/></svg>'
 };
 function makeIcon(state){
   return L.divIcon({className:'', html:`<div class="mk-pin ${ICONS[state]}"><span>${PIN_SVG[state]}</span></div>`, iconSize:[30,30], iconAnchor:[15,28], popupAnchor:[0,-26]});
 }
 function popupHtml(p){
   const price = p.state==="disponible" ? `<div class="pop-price">${fmt(p.price)}</div>`
-    : p.state==="proceso" ? `<div class="pop-price">${fmt(p.price)} · <span style="color:#3f7fd0">reservado</span></div>`
-    : `<div class="pop-price sold">VENDIDO</div>`;
+    : `<div class="pop-price sold">${p.soldLabel || "VENDIDO"}</div>`;
   const msg = encodeURIComponent(`Hola Martel, me interesa la propiedad "${p.name}" en ${p.district}.`);
   return `<div class="pop">
-    <div class="ph" data-label="${phLabel(p)}"></div>
+    <div class="ph" data-label="${phLabel(p)}">${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy">` : ''}</div>
     <div class="pop-body">
       <div class="ptype">${p.type}${p.beds?` · ${p.beds} hab`:''}</div>
       <div class="pname">${p.name}</div>
